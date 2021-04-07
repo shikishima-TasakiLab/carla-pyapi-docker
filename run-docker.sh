@@ -38,12 +38,13 @@ fi
 
 if [[ $START_SERVER == "on" ]]; then
   gnome-terminal -- \
-    -it --rm \
-    -p 2000-2002:2000-2002 \
-    ${RUNTIME} \
-    --name="carla-sim" \
-    carlasim/carla:${CARLA_VERSION} \
-    bash -c "DISPLAY= SDL_VIDEODRIVER=offscreen SDL_HINT_CUDA_DEVICE=0 ./CarlaUE4.sh -opengl"
+    docker run \
+      -it --rm \
+      -p 2000-2002:2000-2002 \
+      ${RUNTIME} \
+      --name="carla-sim" \
+      carlasim/carla:${CARLA_VERSION} \
+      bash -c "DISPLAY= SDL_VIDEODRIVER=offscreen SDL_HINT_CUDA_DEVICE=0 ./CarlaUE4.sh -opengl"
 fi
 
 docker run \
